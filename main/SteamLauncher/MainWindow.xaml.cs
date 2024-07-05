@@ -31,7 +31,10 @@ namespace SteamLauncher
 
         private void RefreshApps(bool force = false)
         {
-            var apps = (from app in AppInfo.GetApps(force) where app.Type == "Game" select app).ToList();
+            var apps = (from app in AppInfo.GetApps(force) 
+                        where app.Type == "Game" 
+                        orderby app.LastPlayed descending, app.Name
+                        select app).ToList();
             var filterapps = (from app in apps where (string.IsNullOrEmpty(FilterTextBox.Text) || (app?.Name?.Contains(FilterTextBox.Text, StringComparison.InvariantCultureIgnoreCase) ?? false)) select app).ToList();
             GameCountTextBlock.Text = $"{apps.Count} installed ({filterapps.Count} showing)";
             SteamAppsListView.ItemsSource = filterapps;
@@ -118,7 +121,7 @@ namespace SteamLauncher
         private void Item_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             
-            if (e.ClickCount == 2 && sender is StackPanel item && item.DataContext is AppInfo app)
+            if (sender is StackPanel item && item.DataContext is AppInfo app)
             {
                 var proc = Process.Start(new ProcessStartInfo
                 {

@@ -34,6 +34,8 @@ namespace SteamLauncher
         public string? Logo { get; set; }
         public BitmapImage? Icon { get; private set; }
 
+        public DateTime LastPlayed { get; set;  }
+
         private static List<AppInfo>? cached_results;
         private static DateTime cache_date;
 
@@ -99,6 +101,8 @@ namespace SteamLauncher
                     var manifest = textdeserializer.Deserialize(manifeststream);
                     steamapp.InstallPath = Path.Join(steamapp.LibraryPath, "steamapps", "common", manifest.First(k => k.Name == "installdir").Value.ToString());
                     steamapp.Name = manifest.First(m => m.Name == "name").Value.ToString();
+                    steamapp.LastPlayed = DateTimeFromUnixTime(uint.Parse(manifest.FirstOrDefault(p => p?.Name == "LastPlayed")?.Value?.ToString() ?? "0"));
+
                 }
             }
 
