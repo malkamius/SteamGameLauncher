@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>gamelauncher.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="gamelauncher.ico" />
+    <None Remove="gamelauncher.png" />
+    <None Remove="refreshbutton.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="gamelauncher.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ValveKeyValue" Version="0.11.0.378" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="gamelauncher.ico" />
+    <Resource Include="gamelauncher.png" />
+    <Resource Include="refreshbutton.png" />
+  </ItemGroup>
+
+</Project>

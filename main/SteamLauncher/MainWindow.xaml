@@ -1,0 +1,54 @@
+﻿<Window x:Class="SteamLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SteamLauncher"
+        mc:Ignorable="d"
+        Title="Steam Launcher" Height="450" Width="800"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded"
+        SizeChanged="SteamAppsListView_SizeChanged" 
+        LocationChanged="Window_LocationChanged" 
+        Icon="pack://application:,,,/gamelauncher.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions> 
+        <Grid HorizontalAlignment="Stretch" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Margin="3,3,3,3">Filter</TextBlock>
+                <TextBox x:Name="FilterTextBox" Margin="3,3,3,3" Width="160" TextChanged="FilterTextBox_TextChanged"></TextBox>
+            </StackPanel>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="GameCountTextBlock"></TextBlock>
+
+            <Button Grid.Column="2" Width="64" Height="64" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click">
+                <Image Source="pack://application:,,,/refreshbutton.png" />
+            </Button>
+        </Grid>
+        <ListView x:Name="SteamAppsListView" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                               ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                               ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Width="128" Height="128" MouseLeftButtonUp="Item_MouseLeftButtonUp">
+                        <Image MaxWidth="60" MaxHeight="60" Source="{Binding Icon}" Margin="0,10,0,0"/>
+                        <TextBlock Text="{Binding Name}" TextAlignment="Center" TextWrapping="Wrap" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Window>
