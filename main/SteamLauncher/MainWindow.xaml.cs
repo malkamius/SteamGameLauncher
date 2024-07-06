@@ -155,16 +155,21 @@ namespace SteamLauncher
             RefreshApps();
         }
 
-        private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void SteamAppsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2 && sender is StackPanel item && item.DataContext is AppInfo app)
+            if (sender is ListView view && view.SelectedItem is AppInfo app && app != null)
             {
-                var proc = Process.Start(new ProcessStartInfo
-                {
-                    FileName = $"steam://rungameid/{app.AppId}",
-                    UseShellExecute = true
-                });
+                LaunchApp(app); 
             }
+        }
+
+        private void LaunchApp(AppInfo app)
+        {
+            var proc = Process.Start(new ProcessStartInfo
+            {
+                FileName = $"steam://rungameid/{app.AppId}",
+                UseShellExecute = true
+            });
         }
     }
 }
