@@ -154,5 +154,17 @@ namespace SteamLauncher
             config.Save(ConfigurationSaveMode.Modified);
             RefreshApps();
         }
+
+        private void Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2 && sender is StackPanel item && item.DataContext is AppInfo app)
+            {
+                var proc = Process.Start(new ProcessStartInfo
+                {
+                    FileName = $"steam://rungameid/{app.AppId}",
+                    UseShellExecute = true
+                });
+            }
+        }
     }
 }

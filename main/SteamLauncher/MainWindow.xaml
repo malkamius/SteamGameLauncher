@@ -42,7 +42,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Width="128" Height="128" MouseLeftButtonUp="Item_MouseLeftButtonUp">
+                    <StackPanel Orientation="Vertical" Width="128" Height="128" MouseLeftButtonDown="Item_MouseLeftButtonDown">
                         <Image MaxWidth="60" MaxHeight="60" Source="{Binding Icon}" Margin="0,10,0,0"/>
                         <TextBlock Text="{Binding Name}" TextAlignment="Center" TextWrapping="Wrap" Margin="5"/>
                     </StackPanel>
